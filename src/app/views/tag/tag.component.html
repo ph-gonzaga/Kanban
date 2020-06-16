@@ -1,0 +1,44 @@
+<div>
+  <h1>Tags</h1>
+
+  <!-- Botão para adicionar tag -->
+  <button (click)="addTag()" class="add-fab" color="primary" mat-fab><mat-icon>add</mat-icon></button>
+
+  <!-- Form para adiconar uma nova tag ou atualizar uma existente, após clicar no botão correspondente -->
+  <mat-card class="card-new card-none" id="formCard">
+    <mat-card-title>Tag</mat-card-title>
+    <mat-card-content *ngIf="tagSelecionada">
+      <mat-form-field appearance="standard">
+        <mat-label>Nome</mat-label>
+        <input [(ngModel)]="tagSelecionada.nome" matInput #name required minlength="1" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="salvar()" mat-button> Salvar </button>
+      <button mat-raised-button color="warn" (click)="limpar()" mat-button> Cancelar </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Tabela de tags, com os devidos botões -->
+  <div class="table-space">
+    <mat-table [dataSource]="tags">
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let tag"> {{ tag.nome }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell class="btns-actions" *matCellDef="let tag">
+          <button mat-button color="primary">
+            <mat-icon (click)="selecionaTag(tag)">edit</mat-icon>
+          </button>
+          <button mat-button color="warn">
+            <mat-icon (click)="excluir(tag._id)">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunas"></mat-row>
+    </mat-table>
+  </div>
+</div>

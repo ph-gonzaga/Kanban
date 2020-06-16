@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <button (click)="sidenav.toggle()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h2>Kanban</h2>
+</mat-toolbar>
+
+<mat-sidenav-container>
+
+  <mat-sidenav mode="push" #sidenav>
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" mat-list-item routerLink="/card">Kanban</a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" mat-list-item routerLink="/tag">Tags</a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" mat-list-item routerLink="/about">Sobre</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <router-outlet></router-outlet>
+
+
+</mat-sidenav-container>

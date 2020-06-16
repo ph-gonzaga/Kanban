@@ -1,0 +1,40 @@
+h1 {
+  text-align: center;
+}
+
+.card-new {
+  margin: 0 auto;
+  margin-bottom: 60px;
+  width: 20%;
+}
+
+.card-none {
+  height: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+.add-fab {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin-right: 50px;
+  margin-bottom: 50px;
+}
+
+.table-space {
+  margin: 0 auto;
+  width: 50%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+ /* MEDIAS */
+@media (max-width: 1000px) {
+  .card-new{
+  width: 50%;
+  }
+}
+

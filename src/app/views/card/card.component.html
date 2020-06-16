@@ -1,0 +1,131 @@
+<div>
+  <h1>Kanban</h1>
+
+  <!-- Botão para adicionar card -->
+  <button (click)="addCard()" mat-fab class="add-fab" color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+
+
+  <!-- Form para adiconar um novo card ou atualizar um existente, após clicar no botão correspondente -->
+  <mat-card class="card-new card-none" id="formCard">
+
+    <mat-card-title>Card</mat-card-title>
+
+    <mat-card-content *ngIf="tarefaSelecionada">
+      <mat-form-field appearance="standard">
+        <mat-label>Nome</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.nome" matInput #nome maxlength="100" id="nome"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Descrição</mat-label>
+        <input [(ngModel)]="tarefaSelecionada.descricao" matInput #descricao maxlength="100" id="descricao"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Tag</mat-label>
+        <mat-select id="tagInput" [(ngModel)]="tarefaSelecionada.tag">
+          <mat-option ([ngModel])="(tags)" *ngFor="let tag of tags" [value]="tag._id">
+            {{ tag.nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="salvar()"> Salvar </button>
+      <button mat-raised-button color="warn" (click)="limpar()"> Cancelar </button>
+    </mat-card-actions>
+  </mat-card>
+
+
+  <!-- Boards TO DO, DOING e DONE -->
+  <div class="boards">
+    <div class="board-container">
+      <h4>TO DO</h4>
+      <div id="todo" cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[doingList, doneList]" class="list-tasks" (cdkDropListDropped)="dragDrop($event)">
+        <div class="cont-box" *ngFor="let item of todo" [id]="item._id" cdkDrag>
+
+          <span>
+            <div *ngFor="let tag of tags">
+              <span class="categoria-span" *ngIf="tag._id === item.tag">
+                <mat-chip-list>
+                  <mat-chip color="primary" selected> {{tag.nome}} </mat-chip>
+                </mat-chip-list>
+              </span>
+            </div>
+            {{ item.nome }}
+          </span>
+          <div>
+            <button mat-icon-button color="primary" (click)="selecionarTarefa(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="excluir(item._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOING -->
+    <div class="board-container">
+      <h4>DOING</h4>
+      <div id="doing" cdkDropList #doingList="cdkDropList" [cdkDropListData]="doing"
+        [cdkDropListConnectedTo]="[todoList, doneList]" class="list-tasks" (cdkDropListDropped)="dragDrop($event)">
+        <div class="cont-box" *ngFor="let item of doing" [id]="item._id" cdkDrag>
+
+          <span>
+            <div *ngFor="let tag of tags">
+              <span class="categoria-span" *ngIf="tag._id == item.tag">
+                <mat-chip-list>
+                  <mat-chip color="primary" selected> {{tag.nome}} </mat-chip>
+                </mat-chip-list>
+              </span>
+            </div>
+            {{ item.nome }}
+          </span>
+          <div>
+            <button mat-icon-button color="primary" (click)="selecionarTarefa(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="excluir(item._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DONE -->
+    <div class="board-container">
+      <h4>DONE</h4>
+      <div id="done" cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList, doingList]" class="list-tasks" (cdkDropListDropped)="dragDrop($event)">
+        <div class="cont-box" *ngFor="let item of done" [id]="item._id" cdkDrag>
+
+          <span>
+            <div *ngFor="let tag of tags">
+              <span class="categoria-span" *ngIf="tag._id == item.tag">
+                <mat-chip-list>
+                  <mat-chip color="primary" selected> {{tag.nome}} </mat-chip>
+                </mat-chip-list>
+              </span>
+            </div>
+            {{ item.nome }}
+          </span>
+          <div>
+            <button mat-icon-button color="primary" (click)="selecionarTarefa(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="excluir(item._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

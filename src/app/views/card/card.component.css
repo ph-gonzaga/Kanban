@@ -1,0 +1,82 @@
+
+h1, h2, h4 {
+  text-align: center;
+}
+
+.boards {
+  padding-bottom: 10px;
+}
+
+.card-new {
+  margin: 0 auto;
+  margin-bottom: 40px;
+  width: 30%;
+}
+
+.card-none {
+  opacity: 0;
+  height: 0;
+  margin-bottom: 0;
+  z-index: -1;
+}
+
+.add-fab {
+  bottom: 0;
+  right: 0;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  z-index: 1;
+  position: fixed;
+}
+
+.cont-box {
+  border-bottom: solid 1px gray;
+  padding: 15px 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: grab;
+  box-sizing: border-box;
+  font-size: 19px;
+  background: rgb(211, 215, 255);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.board-container {
+  vertical-align: top;
+  display: inline-block;
+  width: calc(32% - 20px);
+  margin: 6px 20px;
+  margin-bottom: 40px;
+}
+
+.list-tasks {
+  box-shadow: gray 0px 2px 6px;
+  min-height: 50px;
+  background: #ffffff;
+  display: block;
+  overflow: hidden;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+/* MEDIAS */
+@media (max-width: 750px) {
+  .board-container{
+    margin: 6px 10px;
+    width: 65%;
+  }
+}
+
+@media (min-width: 751px) and (max-width: 1500px) {
+  .board-container{
+    margin: 6px 10px;
+    width: calc(32% - 10px);
+  }
+}
